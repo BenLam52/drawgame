@@ -1,0 +1,133 @@
+.normal-button {
+    background-color: darkblue;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    width: auto;
+    margin: 2px 0px;
+    white-space: nowrap;
+}
+
+.cancel-button {
+    background-color: gainsboro;
+    color: darkblue;
+    padding: 4px 16px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    width: auto;
+    margin: 2px 0px;
+    white-space: nowrap;
+}
+
+.normal-form {
+    padding: 16px 8px;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.progress-bar-style {
+    height: 40px;
+    background-color: black;
+    /* Background color of the progress bar */
+}
+
+.progress-style {
+    height: 20%;
+    background-color: grey;
+    /* Change this color to set the progress bar color */
+}
+
+.remaining-progress-style {
+    height: 20%;
+    background-color: lightgrey;
+    /* Change this color to set the remaing progress bar color */
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+}
+
+.countdown {
+    width: 24px;
+    position: absolute;
+    top: 10%;
+    right: 0px;
+}
+
+.countdown div {
+    padding: 0 5px;
+    background: rgba(255, 255, 255, 0.6);
+    color: #fff;
+}
+
+.replay-button-div {
+    position: absolute;
+    top: 40%;
+    right: 40%;
+}
+
+.replay-button {
+    background-color: darkblue;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    width: auto;
+    margin: 2px 0px;
+    white-space: nowrap;
+}
+
+.skip-button {
+    background: rgba(255, 255, 255, 0);
+    color: #fff;
+    border: none;
+    margin: -2px;
+}
+
+@media (max-width: 768px) {
+    .countdown {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 300px) {
+    .countdown {
+        font-size: 12px;
+    }
+    .replay-button{
+        font-size: 12px;
+    }
+}
+
+.hospital-dropdown-menu {
+    border-radius: 6px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #666 #f1f1f1;
+}
+
+.hospital-dropdown-toggle {
+    background-color: white !important;
+    color: #999 !important;
+    border: 1px solid #cccccc !important;
+    padding: 10px;
+}
