@@ -9,7 +9,8 @@ const GamePage = () => {
     const [selectedAnswers, setSelectedAnswers] = useState([]);
     const [isSuccess, setIsSuccess] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [gameChance, setGameChance] = useState(parseInt(localStorage.getItem('gameChance')));
+    // const [gameChance, setGameChance] = useState(parseInt(localStorage.getItem('gameChance')));
+    const [gameChance, setGameChance] = useState(10);
 
     const data = [
         "answer 1", "answer 2", "answer 3", "answer 4", "answer 5",
@@ -61,18 +62,18 @@ const GamePage = () => {
 
     return (
         <>
-            <Container className='mt-2 d-flex justify-content-center' style={{ maxWidth: '100%' }}>
+            <Container className='mt-2 d-flex justify-content-start' style={{ maxWidth: '100%' }}>
                 <div>
-                    <p>Please choose all correct answers.</p>
+                    <p>Which are advantages of Clnical Genie? Please choose all correct answers by clicking them.</p>
                 </div>
             </Container>
             <Container className='d-flex justify-content-center' style={{ maxWidth: '100%' }}>
-                <div style={{ width: '100%', height: 120, border: "2px solid" }}>
+                <div className='game-pool'>
                     <Row className='justify-content-start' style={{ padding: "5px" }}>
                         {selectedAnswers.map((answer, index) => (
                             <Col xs="auto" key={index} className='mb-2'>
                                 <button
-                                    style={{ fontSize: '16px', width: '100px' }}
+                                    className='answer-style'
                                     onClick={() => handleMoveBack(answer)}
                                     disabled={submitted || gameChance === 0}
                                 >
@@ -88,7 +89,7 @@ const GamePage = () => {
                     {buttons.map((item, index) => (
                         <Col xs="auto" key={index} className='mb-2'>
                             <button
-                                style={{ fontSize: '16px', width: '100px' }}
+                                className='answer-style'
                                 onClick={() => handleAnswerClick(item)}
                                 disabled={submitted || gameChance === 0}
                             >
@@ -128,7 +129,7 @@ const GamePage = () => {
                                     <button className='normal-button' onClick={handleRetry}>Retry</button>
                                 </Col>
                                 <Col xs='auto'>
-                                    <button className='normal-button' onClick={() => { navigate('/video') }}>Back</button>
+                                    <button className='normal-button' onClick={() => { navigate('/video', { state: { reason: 'backFromGame' } }) }}>Back</button>
                                 </Col>
                             </Row>
                         </> : <>

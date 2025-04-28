@@ -7,6 +7,19 @@ function FormPage() {
 
     const titleOptions = ["Mr", "Mrs", "Miss", "Ms", "Dr", "Prof", "Mx", "Others"];
 
+    const hospitalList = [
+        "Hospital 1",
+        "Hospital 2",
+        "Hospital 3",
+        "Hospital 4",
+        "Hospital 5",
+        "Hospital 6",
+        "Hospital 7",
+        "Hospital 8",
+        "Hospital 9",
+        "Hospital 10"
+    ];
+
     const [title, setTitle] = useState('');
     const [name, setName] = useState('');
     const [position, setPosition] = useState('');
@@ -21,9 +34,9 @@ function FormPage() {
     const [isEmailEmpty, setIsEmailEmpty] = useState(false);
     const [isHospitalEmpty, setIsHospitalEmpty] = useState(false);
 
+    const [menuOpen, setMenuOpen] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [emptyFieldExist, setEmptyFieldExist] = useState(false);
-
 
     const handleConfirm = async () => {
         try {
@@ -80,6 +93,15 @@ function FormPage() {
         return title.trim() === '' || name.trim() === '' || position.trim() === '' || email.trim() === '' || hospital.trim() === ''
     }
 
+    const filteredOptions = hospitalList.filter(option =>
+        option.toLowerCase().includes(hospital.toLowerCase())
+    );
+
+    const onChange = (selectedOption) => {
+        console.log(`Selected option: ${selectedOption}`);
+        // Perform any additional actions upon option selection
+    };
+
     return (
         <>
             <Container className='d-flex justify-content-start mt-2'>
@@ -101,25 +123,34 @@ function FormPage() {
                                     Title
                                 </Form.Label>
                                 <Col>
-                                    {/* <Form.Control
-                                        className={isTitleEmpty && 'is-invalid'}
-                                        placeholder={'Title'}
-                                        onChange={(event) => { setTitle(event.target.value); setIsTitleEmpty(false) }} />
-                                    {isTitleEmpty && <Form.Control.Feedback type="invalid">{"Please input this field"}</Form.Control.Feedback>} */}
-                                    <Dropdown>
-                                        <Dropdown.Toggle className = 'hospital-dropdown-toggle' style={{ minWidth: '100%' }} >
-                                            {title ? title : 'Select a title'}
+                                    <Dropdown className='w-100'>
+                                        <Dropdown.Toggle
+                                            variant='light'
+                                            className='w-100 hospital-dropdown-toggle'
+                                        >
+                                            <span className={title ? 'hospital-dropdown-toggle-selected-text' : 'hospital-dropdown-toggle-placeholder-text'}>
+                                                {title || 'Select a title'}
+                                            </span>
                                         </Dropdown.Toggle>
+                                        <Dropdown.Menu
+                                            className='w-100 hospital-dropdown-menu'
+                                            style={{ maxHeight: '200px', overflowY: 'auto' }}
+                                        >
 
-                                        <Dropdown.Menu style={{ minWidth: '100%' }}>
                                             {titleOptions.map((option, index) => (
-                                                <Dropdown.Item key={index} onClick={() => handleSelectTitleChange(option)}>
+                                                <Dropdown.Item
+                                                    key={index}
+                                                    onClick={() => {
+                                                        handleSelectTitleChange(option);
+                                                    }}
+                                                    className="hospital-dropdown-item"
+                                                >
                                                     {option}
                                                 </Dropdown.Item>
                                             ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                    {isTitleEmpty && <div type="invalid">{"Please select title"}</div>}
+                                    {isTitleEmpty && <div type="invalid" className='warn-text mt-1'>{"Please select title"}</div>}
                                 </Col>
                             </Row>
                         </Form.Group>
@@ -185,11 +216,47 @@ function FormPage() {
                                     Hospital
                                 </Form.Label>
                                 <Col>
-                                    <Form.Control
-                                        className={isHospitalEmpty && 'is-invalid'}
-                                        placeholder={'Hospital'}
-                                        onChange={(event) => { setHospital(event.target.value); setIsHospitalEmpty(false) }} />
-                                    {isHospitalEmpty && <Form.Control.Feedback type="invalid">{"Please input this field"}</Form.Control.Feedback>}
+                                    <Dropdown show={menuOpen} onToggle={(isOpen) => setMenuOpen(isOpen)}>
+                                        <Form.Control
+                                            type="text"
+                                            value={hospital}
+                                            placeholder="Hospital"
+                                            onChange={(e) => {
+                                                setIsHospitalEmpty(false)
+                                                setHospital(e.target.value);
+                                                setMenuOpen(true);
+                                            }}
+                                            className={isHospitalEmpty && 'is-invalid'}
+                                            onFocus={(e) => {
+                                                e.stopPropagation();
+                                                setMenuOpen(true);
+                                            }}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setMenuOpen(true);
+                                            }}
+                                        />
+                                        {isHospitalEmpty && <Form.Control.Feedback type="invalid">{"Please input this field"}</Form.Control.Feedback>}
+                                        <Dropdown.Menu
+                                            className='w-100 hospital-dropdown-menu'
+                                            style={{ maxHeight: '200px', overflowY: 'auto' }}
+                                        >
+                                            {filteredOptions.map((option, index) => (
+                                                <Dropdown.Item
+                                                    key={index}
+                                                    onClick={() => {
+                                                        onChange(option);
+                                                        setIsHospitalEmpty(false)                                                        
+                                                        setHospital(option);
+                                                        setMenuOpen(false);
+                                                    }}
+                                                    className="hospital-dropdown-item"
+                                                >
+                                                    {option}
+                                                </Dropdown.Item>
+                                            ))}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                                 </Col>
                             </Row>
                         </Form.Group>

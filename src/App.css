@@ -28,6 +28,23 @@
     border-radius: 10px;
 }
 
+.game-pool {
+    border: 2px solid #0956bd;
+    border-radius: 10px;
+    width: 100%;
+    height: 200px;
+}
+
+.answer-style {
+    font-size: 20px;
+    width: 100%;
+    text-align: left;
+    background: linear-gradient(to right, #5187c8, #72bcdc);
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
 .bold-text {
     font-weight: bold;
 }
@@ -100,6 +117,11 @@
     margin: -2px;
 }
 
+.warn-text {
+    color: #dc3545;
+    font-size: 14px;
+}
+
 @media (max-width: 768px) {
     .countdown {
         font-size: 16px;
@@ -110,9 +132,53 @@
     .countdown {
         font-size: 12px;
     }
-    .replay-button{
+
+    .replay-button {
         font-size: 12px;
     }
+}
+
+
+/* ---- Dropdown Custom Styling ---- */
+.hospital-dropdown-toggle {
+    background-color: white !important;
+    color: #999 !important;
+    border: 1px solid #cccccc !important;
+    padding: 10px;
+    text-align: left;
+    /* Align the text to the left */
+}
+
+.hospital-dropdown-toggle::after {
+    position: absolute;
+    right: 10px;
+    /* Move the arrow to the right */
+    top: 50%;
+    transform: translateY(-50%);
+    /* Vertically center the arrow */
+}
+
+.hospital-dropdown-toggle:focus,
+.hospital-dropdown-toggle:active {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.hospital-dropdown-toggle-placeholder-text {
+    display: flex;
+    justify-content: start;
+    color: #999;
+}
+
+.hospital-dropdown-toggle-selected-text {
+    display: flex;
+    justify-content: start;
+    color: #000;
+}
+
+.hospital-dropdown-toggle:hover {
+    background-color: white !important;
+    color: #999 !important;
 }
 
 .hospital-dropdown-menu {
@@ -125,9 +191,143 @@
     scrollbar-color: #666 #f1f1f1;
 }
 
-.hospital-dropdown-toggle {
-    background-color: white !important;
-    color: #999 !important;
-    border: 1px solid #cccccc !important;
-    padding: 10px;
+.hospital-dropdown-item {
+    color: #333 !important;
+}
+
+.hospital-dropdown-item:hover,
+.hospital-dropdown-item:focus {
+    background-color: #f0f0f0 !important;
+    color: #333 !important;
+}
+
+.hospital-dropdown-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.hospital-dropdown-menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.hospital-dropdown-menu::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+}
+
+.hospital-dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.hospital-dropdown-menu .form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.hospital-dropdown-menu .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* animation surround the QRcode */
+.qrcode-container {
+    width: 240px;
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.line {
+    position: absolute;
+}
+
+.line:nth-child(1) {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, transparent, orange);
+    animation: animate1 8s linear infinite;
+}
+
+@keyframes animate1 {
+    0% {
+        left: -100%;
+    }
+
+    50%,
+    100% {
+        left: 100%;
+    }
+}
+
+.line:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, red);
+    animation: animate2 8s linear infinite;
+    animation-delay: 2s;
+}
+
+@keyframes animate2 {
+    0% {
+        top: -100%;
+    }
+
+    50%,
+    100% {
+        top: 100%;
+    }
+}
+
+.line:nth-child(3) {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: linear-gradient(270deg, transparent, green);
+    animation: animate3 8s linear infinite;
+    animation-delay: 4s;
+}
+
+@keyframes animate3 {
+    0% {
+        right: -100%;
+        height: 6px;
+    }
+
+    50%,
+    100% {
+        height: 6px;
+        right: 100%;
+    }
+}
+
+.line:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #3a86ff);
+    animation: animate4 8s linear infinite;
+    animation-delay: 6s;
+}
+
+@keyframes animate4 {
+    0% {
+        bottom: -100%;
+    }
+
+    50%,
+    100% {
+        bottom: 100%;
+    }
 }

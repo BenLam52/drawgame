@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import demoVideo from '../assets/demovideo.mp4';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function VideoPage() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { reason } = location.state || {};
 
     const videoRef = useRef();
 
@@ -52,6 +54,12 @@ function VideoPage() {
     //         setDuration(videoRef.current.duration);
     //     });
     // }, []);
+
+    useEffect(() => {
+        if (reason && reason === "backFromGame") {
+            setVideoFinished(true);
+        }
+    }, []);
 
     useEffect(() => {
         const handleVideoEnd = () => {

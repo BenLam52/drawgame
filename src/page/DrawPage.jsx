@@ -37,15 +37,27 @@ function DrawPage() {
         setHasPrize(false);
     };
 
+    function formatDateTime(inputDateTimeString) {
+        const year = inputDateTimeString.slice(0, 4);
+        const month = inputDateTimeString.slice(4, 6);
+        const day = inputDateTimeString.slice(6, 8);
+        const hours = inputDateTimeString.slice(9, 11);
+        const minutes = inputDateTimeString.slice(12, 14);
+        const seconds = inputDateTimeString.slice(15, 17);
+
+        const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        return formattedDateTime;
+    }
 
     return (
         <>
-            <Container className='d-flex justify-content-center mt-2 flex-column'
-            // style={{ maxWidth: '100%' }}
-            >
+            <Container className='d-flex justify-content-center mt-2 flex-column'>
                 {!drawed ? <>
                     <Row className='text-center'>
-                        <Col>
+                        <Col xs={12}>
+                            Click the button to participate in the lucky draw.
+                        </Col>
+                        <Col className='mt-2'>
                             <button className='normal-button' onClick={handleDrawPrize}>Draw </button>
                         </Col>
                         {/* <Col>
@@ -56,19 +68,25 @@ function DrawPage() {
                     {
                         hasPrize ? <>
                             <Row>
-                                <Col>
+                                <Col sm={12}>
                                     <p>Congratulations! You've won {successResponse.result.prize}!</p>
-                                    <p>Your redeem QR Code: {successResponse.result.redeemQRCode}</p>
-                                    <div>
-                                        <QRCodeSVG value={successResponse.result.redeemQRCode} />
-                                    </div>
-                                    <p>Expiry Date: {successResponse.result.expiryDateTime}</p>
+                                    <p>Please redeem before : {formatDateTime(successResponse.result.expiryDateTime)}</p>
+                                    <p>Your redeem QR Code :</p>                                 
+                                </Col>
+                                <Col sm={12} className='d-flex justify-content-center'>
+                                        <div className="qrcode-container">
+                                            <span className="line"></span>
+                                            <span className="line"></span>
+                                            <span className="line"></span>
+                                            <span className="line"></span>
+                                            <QRCodeSVG value={successResponse.result.redeemQRCode} />
+                                        </div>
                                 </Col>
                             </Row>
                         </> : <>
                             <Row>
                                 <Col>
-                                    <p>Sorry, better luck next time!</p>
+                                    <p>Sorry, better luck next time.</p>
                                 </Col>
                             </Row>
                         </>
